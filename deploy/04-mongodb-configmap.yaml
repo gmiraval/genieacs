@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-init-script
+  namespace: genieacs
+data:
+  init.js: |
+    db = db.getSiblingDB('genieacs');
+    db.createUser({
+      user: "user",
+      pwd: "pass",
+      roles: [{ role: "readWrite", db: "genieacs" }]
+    });
+

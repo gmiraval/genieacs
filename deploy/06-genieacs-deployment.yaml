@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: genieacs
+  namespace: genieacs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: genieacs
+  template:
+    metadata:
+      labels:
+        app: genieacs
+    spec:
+      containers:
+      - name: genieacs
+        image: miravallesg/genieacs:1.2.9
+        env:
+        - name: GENIEACS_MONGODB_CONNECTION_URL
+          value: "mongodb://user:pass@mongo:27017/genieacs"
+        - name: GENIEACS_UI_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ui-jwt-secret
+              key: jwt-secret
+        - name: TZ
+          value: "America/Argentina/Buenos_Aires"
+        ports:
+        - containerPort: 7547
+        - containerPort: 7557
+        - containerPort: 7567
+        - containerPort: 3000

@@ -1,0 +1,51 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: genieacs-cert-letsencrypt-prod
+  namespace: genieacs
+spec:
+  secretName: genieacs-cert-letsencrypt-prod
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer   
+  dnsNames:
+    - uigenieacs.kube.cablevision-labs.com.ar
+    - cwmpgenieacs.kube.cablevision-labs.com.ar
+    - cwmpgenieacs.int.kube.cablevision-labs.com.ar
+    - nbigenieacs.kube.cablevision-labs.com.ar
+    - fsgenieacs.kube.cablevision-labs.com.ar
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cwmp
+  namespace: genieacs
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`cwmpgenieacs.kube.cablevision-labs.com.ar`) || Host(`cwmpgenieacs.int.kube.cablevision-labs.com.ar`)
+    kind: Rule
+    services:
+    - name: genieacs
+      port: 7547
+
+  - match: Host(`nbigenieacs.kube.cablevision-labs.com.ar`)
+    kind: Rule
+    services:
+      - name: genieacs
+        port: 7557
+  - match: Host(`fsgenieacs.kube.cablevision-labs.com.ar`)
+    kind: Rule
+    services:
+      - name: genieacs
+        port: 7567
+  - match: Host(`uigenieacs.kube.cablevision-labs.com.ar`)
+    kind: Rule
+    services:
+      - name: genieacs
+        port: 3000
+  
+  
+  tls:
+    secretName: genieacs-cert-letsencrypt-prod

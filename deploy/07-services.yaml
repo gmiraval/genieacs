@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: genieacs
+  namespace: genieacs
+spec:
+  selector:
+    app: genieacs
+  ports:
+    - name: cwmp
+      protocol: TCP
+      port: 7547
+      targetPort: 7547
+    - name: nbi
+      protocol: TCP
+      port: 7557
+      targetPort: 7557
+    - name: fs
+      protocol: TCP
+      port: 7567
+      targetPort: 7567
+    - name: gui
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
