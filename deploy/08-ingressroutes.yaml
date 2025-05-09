@@ -29,7 +29,7 @@ spec:
     services:
     - name: genieacs
       port: 7547
-
+  
   - match: Host(`nbigenieacs.kube.cablevision-labs.com.ar`)
     kind: Rule
     services:

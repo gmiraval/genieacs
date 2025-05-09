@@ -35,4 +35,3 @@ C:\Users\u606348>kubectl -n genieacs exec -it genieacs-5f667bd855-xnz2v -- bash
 root@genieacs-5f667bd855-xnz2v:/var/log/genieacs# tail -f /var/log/genieacs/genieacs-cwmp.log
 
 
-

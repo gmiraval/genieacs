@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cwmphttp
+  namespace: genieacs
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`cwmpgenieacs.kube.cablevision-labs.com.ar`) || Host(`cwmpgenieacs.int.kube.cablevision-labs.com.ar`)
+    kind: Rule
+    services:
+    - name: genieacs
+      port: 7547
+
