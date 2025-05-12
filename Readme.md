@@ -1,10 +1,11 @@
 #Instalacion de genieacs en cluster kubernetes
+https://medium.com/@kvihanga/streamlining-device-management-installing-genieacs-on-kubernetes-simplified-95b15b11a646
 
 ##Build a docker image and push it to the docker hub
 
-docker build -t genieacs:1.2.9 .
-docker tag genieacs:1.2.9 miravallesg/genieacs:1.2.9
-docker push miravallesg/genieacs:1.2.9
+docker build -t genieacs:1.2.13 .
+docker tag genieacs:1.2.13 miravallesg/genieacs:1.2.13
+docker push miravallesg/genieacs:1.2.13
 
 ##configuramos secret con jwt para ui
 SECRET=$(node -e "console.log(require('crypto').randomBytes(128).toString('hex'))")

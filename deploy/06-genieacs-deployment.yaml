@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: genieacs
-        image: miravallesg/genieacs:1.2.9
+        image: miravallesg/genieacs:1.2.13
         env:
         - name: GENIEACS_MONGODB_CONNECTION_URL
           value: "mongodb://user:pass@mongo:27017/genieacs"
